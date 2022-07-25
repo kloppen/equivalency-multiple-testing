@@ -1,0 +1,58 @@
+---
+title: "Compute Factors"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+This R Markdown document is used to compute the factors $k_1$ and $k_2$.
+
+```{r}
+library(tidyverse)
+library(furrr)
+library(cmstatr)
+library(cmstatrExt)
+# To install cmstatrExt:
+# devtools::install_github("cmstatr/cmstatrExt")
+```
+
+```{r}
+plan(multisession, workers = 12)
+
+factors <- expand_grid(
+  alpha = c(0.05, 0.01, 0.005),
+  n = c(12, 18, 24, 30, 36, 50, 100, 1000, Inf),
+  m = c(3, 4, 5, 6, 7, 8, 9, 10)
+) %>% 
+  future_pmap(
+    function(alpha, n, m) {
+      if (is.infinite(n)) {
+        res <- k_equiv(alpha, m)
+      } else {
+        res <- k_equiv_two_sample(alpha, n, m)
+      }
+      tibble(alpha = alpha, n = n, m = m,
+             k1 = res[1],
+             k2 = res[2]
+      )
+    }
+  ) %>% 
+  bind_rows()
+```
+
+```{r}
+factors
+```
+
+```{r}
+write_csv(factors, file = "factors.csv")
+```
+
+```{r}
+sessionInfo()
+```
+

@@ -1,0 +1,323 @@
+---
+title: "Simulation"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This R Markdown document contains the code for performing
+simulation studies related to the present method for
+setting acceptance criteria.
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+load("sim_results.RData")
+```
+
+
+```{r}
+ls_m_breaks <- c(4, 6, 8, 10)
+ls_m_values <- c("solid", "longdash", "dotdash", "dotted")
+```
+
+
+```{r}
+sim_equiv %>% 
+  mutate(`$m$` = as.factor(m)) %>% 
+  mutate(`$n$` = n) %>%
+  group_by(`$n$`, `$m$`, method) %>% 
+  ggplot(aes(x = `$n$`, y = `Rejection Rate`,
+             color = `$m$`, linetype = `$m$`)) +
+  geom_line() +
+  facet_grid(. ~ method) +
+  theme_bw() +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0))) +
+  scale_y_continuous(expand = expansion(0, 0), limits = c(0, 0.15)) +
+  scale_linetype_manual(
+    breaks = ls_m_breaks,
+    values = ls_m_values
+  )
+```
+
+```{r}
+sim_equiv %>% 
+  mutate(m = as.factor(m)) %>% 
+  filter(method == "Two-Sample") %>% 
+  ggplot(aes(x = n, y = `Rejection Rate`,
+             color = m, linetype = m)) +
+  geom_line() +
+  ylim(0, 0.1) +
+  theme_bw() +
+  scale_linetype_manual(
+    breaks = ls_m_breaks,
+    values = ls_m_values
+  )
+```
+
+# Power Simulation (Reduction in Mean)
+
+```{r}
+ls_method_breaks <- c("Two-Sample", "Vangel", "MSD")
+ls_method_values <- c("solid", "dashed", "dotted")
+```
+
+
+```{r}
+sim_power_mean %>%
+  filter(m %in% c(6)) %>% 
+  filter(n %in% c(18)) %>% 
+  rename(Method = method) %>% 
+  mutate(Method = fct_relevel(Method, "Two-Sample", "Vangel", "MSD")) %>% 
+  arrange(m) %>% 
+  arrange(n) %>% 
+  mutate(`$n$` = as_factor(paste0("$n = ", n, "$")),
+         `$m$` = as_factor(paste0("$m = ", m, "$"))) %>%
+  ggplot(aes(x = delta, y = `Rejection Rate`,
+             color = Method, linetype = Method)) +
+  geom_line() +
+  xlab("$\\delta$") +
+  theme_bw() +
+  facet_grid(`$m$` ~ `$n$`) +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0))) +
+  scale_y_continuous(expand = expansion(0, 0), limits = c(0, 1)) +
+  scale_linetype_manual(
+    breaks = ls_method_breaks,
+    values = ls_method_values
+  )
+```
+
+```{r}
+ls_n_breaks <- c(18, 36, 100)
+ls_n_values <- c("solid", "dashed", "dotted")
+```
+
+
+```{r}
+sim_power_mean %>%
+  filter(method == "Two-Sample") %>% 
+  filter(n %in% ls_n_breaks) %>% 
+  arrange(m) %>% 
+  mutate(m = as_factor(paste0("$m = ", m, "$"))) %>% 
+  arrange(n) %>% 
+  mutate(`$n$` = as_factor(n)) %>%
+  ggplot(aes(x = delta, y = `Rejection Rate`,
+             color = `$n$`, linetype = `$n$`)) +
+  geom_line() +
+  xlab("$\\delta$") +
+  theme_bw() +
+  facet_wrap(vars(m)) +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0))) +
+  scale_y_continuous(expand = expansion(0, 0), limits = c(0, 1)) +
+  scale_linetype_manual(
+    breaks = ls_n_breaks,
+    values = ls_n_values
+  )
+```
+
+
+```{r}
+sim_power_mean %>% 
+  filter(method == "Two-Sample") %>% 
+  group_by(n, m) %>% 
+  nest() %>% 
+  mutate(interpolated = map(data, ~approx(.$`Rejection Rate`, .$delta, 0.8))) %>% 
+  mutate(`Delta for beta=0.2` = unlist(map(interpolated, ~.[[2]]))) %>% 
+  select(-c(data, interpolated))
+```
+
+
+```{r}
+sim_power_mean %>% 
+  filter(method == "Two-Sample") %>% 
+  group_by(n, m) %>% 
+  nest() %>% 
+  mutate(interpolated = map(data, ~approx(.$`Rejection Rate`, .$delta, 0.8))) %>% 
+  mutate(`Delta for beta=0.2` = unlist(map(interpolated, ~.[[2]]))) %>% 
+  select(-c(data, interpolated)) %>% 
+  mutate(`$m$` = as.factor(m)) %>% 
+  ggplot(aes(x = n, y = `Delta for beta=0.2`, color = `$m$`, linetype = `$m$`)) +
+  geom_line() +
+  ylab("$\\delta$") +
+  xlab("$n$") +
+  theme_bw() +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0))) +
+  scale_linetype_manual(
+    breaks = ls_m_breaks,
+    values = ls_m_values
+  )
+```
+
+
+
+# Power Simulation (Increase in SD)
+
+```{r}
+sim_power_sd %>%
+  filter(m %in% c(6)) %>% 
+  filter(n %in% c(18)) %>% 
+  rename(Method = method) %>% 
+  mutate(Method = fct_relevel(Method, "Two-Sample", "Vangel", "MSD")) %>% 
+  arrange(m) %>% 
+  arrange(n) %>% 
+  mutate(`$n$` = as_factor(paste0("$n = ", n, "$")),
+         `$m$` = as_factor(paste0("$m = ", m, "$"))) %>%
+  ggplot(aes(x = delta, y = `Rejection Rate`,
+             color = Method, linetype = Method)) +
+  geom_line() +
+  xlab("$\\delta$") +
+  theme_bw() +
+  facet_grid(`$m$` ~ `$n$`) +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0))) +
+  scale_y_continuous(expand = expansion(0, 0), limits = c(0, 1)) +
+  scale_linetype_manual(
+    breaks = ls_method_breaks,
+    values = ls_method_values
+  )
+```
+
+```{r}
+sim_power_sd %>%
+  filter(method == "Two-Sample") %>% 
+  filter(n %in% ls_n_breaks) %>% 
+  arrange(m) %>% 
+  mutate(m = as_factor(paste0("$m = ", m, "$"))) %>% 
+  arrange(n) %>% 
+  mutate(`$n$` = as_factor(n)) %>%
+  ggplot(aes(x = delta, y = `Rejection Rate`,
+             color = `$n$`, linetype = `$n$`)) +
+  geom_line() +
+  xlab("$\\delta$") +
+  theme_bw() +
+  facet_wrap(vars(m)) +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0))) +
+  scale_y_continuous(expand = expansion(0, 0), limits = c(0, 1)) +
+  scale_linetype_manual(
+    breaks = ls_n_breaks,
+    values = ls_n_values
+  )
+```
+
+```{r}
+sim_power_sd %>% 
+  filter(method == "Two-Sample") %>% 
+  group_by(n, m) %>% 
+  nest() %>% 
+  mutate(interpolated = map(data, ~approx(.$`Rejection Rate`, .$delta, 0.8))) %>% 
+  mutate(`Delta for beta=0.2` = unlist(map(interpolated, ~.[[2]]))) %>% 
+  select(-c(data, interpolated))
+```
+
+```{r}
+sim_power_sd %>% 
+  filter(method == "Two-Sample") %>% 
+  group_by(n, m) %>% 
+  nest() %>% 
+  mutate(interpolated = map(data, ~approx(.$`Rejection Rate`, .$delta, 0.8))) %>% 
+  mutate(`Delta for beta=0.2` = unlist(map(interpolated, ~.[[2]]))) %>% 
+  select(-c(data, interpolated)) %>% 
+  mutate(`$m$` = as.factor(m)) %>% 
+  ggplot(aes(x = n, y = `Delta for beta=0.2`, color = `$m$`, linetype = `$m$`)) +
+  geom_line() +
+  ylab("$\\delta$") +
+  xlab("$n$") +
+  theme_bw() +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0))) +
+  scale_linetype_manual(
+    breaks = ls_m_breaks,
+    values = ls_m_values
+  )
+```
+
+
+# Power Simulation (Reduction in Minimum Individual)
+
+```{r}
+sim_power_min_indiv %>%
+  filter(m %in% c(6)) %>% 
+  filter(n %in% c(18)) %>% 
+  rename(Method = method) %>% 
+  mutate(Method = fct_relevel(Method, "Two-Sample", "Vangel", "MSD")) %>% 
+  arrange(m) %>% 
+  arrange(n) %>% 
+  mutate(`$n$` = as_factor(paste0("$n = ", n, "$")),
+         `$m$` = as_factor(paste0("$m = ", m, "$"))) %>%
+  ggplot(aes(x = delta, y = `Rejection Rate`,
+             color = Method, linetype = Method)) +
+  geom_line() +
+  xlab("$\\delta$") +
+  theme_bw() +
+  facet_grid(`$m$` ~ `$n$`) +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0))) +
+  scale_y_continuous(expand = expansion(0, 0), limits = c(0, 1)) +
+  scale_linetype_manual(
+    breaks = ls_method_breaks,
+    values = ls_method_values
+  )
+```
+
+
+```{r}
+sim_power_min_indiv %>%
+  filter(method == "Two-Sample") %>% 
+  filter(n %in% ls_n_breaks) %>% 
+  arrange(m) %>% 
+  mutate(m = as_factor(paste0("$m = ", m, "$"))) %>% 
+  arrange(n) %>% 
+  mutate(`$n$` = as_factor(n)) %>%
+  ggplot(aes(x = delta, y = `Rejection Rate`,
+             color = `$n$`, linetype = `$n$`)) +
+  geom_line() +
+  xlab("$\\delta$") +
+  theme_bw() +
+  facet_wrap(vars(m)) +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0))) +
+  scale_y_continuous(expand = expansion(0, 0), limits = c(0, 1)) +
+  scale_linetype_manual(
+    breaks = ls_n_breaks,
+    values = ls_n_values
+  )
+```
+
+```{r}
+sim_power_min_indiv %>%
+  filter(method == "Two-Sample") %>% 
+  group_by(n, m) %>% 
+  nest() %>% 
+  mutate(interpolated = map(data, ~approx(.$`Rejection Rate`, .$delta, 0.8))) %>% 
+  mutate(`Delta for beta=0.2` = unlist(map(interpolated, ~.[[2]]))) %>% 
+  select(-c(data, interpolated))
+```
+
+
+```{r}
+sim_power_min_indiv %>% 
+  filter(method == "Two-Sample") %>% 
+  group_by(n, m) %>% 
+  nest() %>% 
+  mutate(interpolated = map(data, ~approx(.$`Rejection Rate`, .$delta, 0.8))) %>% 
+  mutate(`Delta for beta=0.2` = unlist(map(interpolated, ~.[[2]]))) %>% 
+  select(-c(data, interpolated)) %>% 
+  mutate(`$m$` = as.factor(m)) %>% 
+  ggplot(aes(x = n, y = `Delta for beta=0.2`, color = `$m$`, linetype = `$m$`)) +
+  geom_line() +
+  ylab("$\\delta$") +
+  xlab("$n$") +
+  theme_bw() +
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0))) +
+  scale_linetype_manual(
+    breaks = ls_m_breaks,
+    values = ls_m_values
+  )
+```
+
+
+```{r}
+sessionInfo()
+```
+

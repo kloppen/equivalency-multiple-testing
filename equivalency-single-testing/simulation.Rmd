@@ -1,0 +1,285 @@
+---
+title: "Simulation"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This R Markdown document contains the code for performing
+simulation studies related to the present method for
+setting acceptance criteria.
+
+```{r}
+library(tidyverse)
+library(furrr)
+library(cmstatr)
+
+plan(multisession, workers = 12)
+```
+
+```{r}
+factors <- read_csv(
+  "factors.csv",
+  col_types = cols(
+    alpha = col_double(),
+    n = col_double(),
+    m = col_double(),
+    k1 = col_double(),
+    k2 = col_double()
+  ))
+```
+
+```{r}
+mu_pop <- 0
+sd_pop <- 1
+
+n_qual_1 <- 5000
+n_equiv_1 <- 5000
+
+n_qual_2 <- 2500
+n_equiv_2 <- 2500
+
+sim_alpha <- 0.05
+
+delta_mean <- seq(0, 2, length.out = 9)
+delta_sd <- seq(1, 5, length.out = 9)
+delta_min_indiv <- seq(0, 4, length.out = 9)
+```
+
+
+```{r}
+sim_n_values <- unique(factors$n[factors$n <= 100])
+sim_m_values <- unique(factors$m[factors$m %% 2 == 0])
+```
+
+
+
+```{r}
+k_factors <- unique(factors$m) %>% 
+  map_dfr(function(m) {
+    k <- k_equiv(sim_alpha, m)
+    tibble(
+      m = m,
+      k1 = k[1],
+      k2 = k[2]
+    )
+  })
+```
+
+
+
+```{r}
+sim_equiv <- map_dfr(
+  sim_m_values,
+  function(cur_m) {
+    k1 <- k_factors$k1[k_factors$m == cur_m]
+    k2 <- k_factors$k2[k_factors$m == cur_m]
+    
+    future_map_dfr(
+      sim_n_values,
+      .options = furrr_options(seed = 1234),
+      function(cur_n) {
+        r1 <- factors$k1[factors$n == cur_n & factors$m == cur_m
+                         & factors$alpha == sim_alpha]
+        r2 <- factors$k2[factors$n == cur_n & factors$m == cur_m
+                         & factors$alpha == sim_alpha]
+        
+        equiv_samples <- future_map_dfr(
+          1:n_equiv_1,
+          .options = furrr_options(seed = 2345),
+          function(i_equiv) {
+            x <- rnorm(cur_m, mu_pop, sd_pop)
+            data.frame(
+              min = min(x),
+              avg = mean(x)
+            )
+          }
+        )
+        
+        future_map_dfr(
+          1:n_qual_1,
+          .options = furrr_options(seed = 3456),
+          function(i_qual) {
+            x_qual <- rnorm(cur_n, mu_pop, sd_pop)
+            avg_qual <- mean(x_qual)
+            sd_qual <- sd(x_qual)
+            
+            rbind(
+              data.frame(
+                method = factor("Vangel", c("Two-Sample", "Vangel")),
+                accept_min = equiv_samples$min > avg_qual - k1 * sd_qual,
+                accept_avg = equiv_samples$avg > avg_qual - k2 * sd_qual
+              ),
+              data.frame(
+                method = factor("Two-Sample", c("Two-Sample", "Vangel")),
+                accept_min = equiv_samples$min > avg_qual - r1 * sd_qual,
+                accept_avg = equiv_samples$avg > avg_qual - r2 * sd_qual
+              )
+            )
+          }
+        ) %>% 
+          mutate(accept = accept_min & accept_avg) %>% 
+          group_by(method) %>%
+          summarise(`Rejection Rate` = sum(!accept) / n(),
+                    .groups = "drop") %>%
+          mutate(n = cur_n, m = cur_m)
+      }
+    )
+  }
+)
+```
+
+# Power Simulation -- Generic
+```{r}
+# equiv_deviation has the arguments:
+# i_equiv, delta, cur_m
+power_simulation <- function(delta_list, equiv_generation) {
+  map_dfr(
+    sim_m_values,
+    function(cur_m) {
+      k1 <- k_factors$k1[k_factors$m == cur_m]
+      k2 <- k_factors$k2[k_factors$m == cur_m]
+      
+      future_map_dfr(
+        sim_n_values,
+        .options = furrr_options(seed = 12345),
+        function(cur_n) {
+          r1 <- factors$k1[factors$n == cur_n & factors$m == cur_m
+                           & factors$alpha == sim_alpha]
+          r2 <- factors$k2[factors$n == cur_n & factors$m == cur_m
+                           & factors$alpha == sim_alpha]
+          
+          t_crit <- qt(1 - sim_alpha / 2, cur_n - 1)
+          f_crit <- qf(1 - sim_alpha / 2, cur_m - 1, cur_n - 1)
+          
+          future_map_dfr(
+            delta_list,
+            .options = furrr_options(seed = 23456),
+            function(delta) {
+              equiv_samples <- future_map_dfr(
+                1:n_equiv_2,
+                .options = furrr_options(seed = 34567),
+                function(i_equiv) {
+                  x <- equiv_generation(i_equiv, delta, cur_m)
+                  data.frame(
+                    min = min(x),
+                    avg = mean(x),
+                    sd_eq = sd(x)
+                  )
+                }
+              )
+              
+              future_map_dfr(
+                1:n_qual_2,
+                .options = furrr_options(seed = 45678),
+                function(i_qual) {
+                  x_qual <- rnorm(cur_n, mu_pop, sd_pop)
+                  avg_qual <- mean(x_qual)
+                  sd_qual <- sd(x_qual)
+                  
+                  # Ref. Escobar, pp. 55
+                  t_min <- avg_qual - t_crit * sqrt(1 / cur_n + 1 / cur_m) * sd_qual
+                  
+                  # Ref. Escobar, pp. 58
+                  f_max <- sd_qual * sqrt(f_crit)
+                  
+                  accept_min <- equiv_samples$min > avg_qual - r1 * sd_qual
+                  accept_avg <- equiv_samples$avg > avg_qual - r2 * sd_qual
+                  accept_t <- equiv_samples$avg >= t_min
+                  accept_f <- equiv_samples$sd_eq <= f_max
+                  accept_vangel_min <- equiv_samples$min > avg_qual - k1 * sd_qual
+                  accept_vangel_avg <- equiv_samples$avg > avg_qual - k2 * sd_qual
+                  
+                  data.frame(
+                    accept = c(accept_min & accept_avg,
+                               accept_t & accept_f,
+                               accept_vangel_min & accept_vangel_avg),
+                    method = as.factor(c(rep_len("Two-Sample", n_equiv_2),
+                                         rep_len("MSD", n_equiv_2),
+                                         rep_len("Vangel", n_equiv_2)))
+                  )
+                }
+              ) %>% 
+                group_by(method) %>% 
+                summarise(`Rejection Rate` = sum(!accept) / n(),
+                          .groups = "drop") %>%
+                mutate(n = cur_n, m = cur_m, delta = delta)
+            }
+          )
+        }
+      )
+    }
+  )
+}
+```
+
+
+
+# Power Simulation (Reduction in Mean)
+
+```{r}
+sim_power_mean <- power_simulation(
+  delta_mean,
+  function(i_equiv, delta, cur_m) {
+    rnorm(cur_m, mu_pop - delta * sd_pop, sd_pop)
+  }
+)
+```
+
+
+
+# Power Simulation (Increase in SD)
+
+```{r}
+sim_power_sd <- power_simulation(
+  delta_sd,
+  function(i_equiv, delta, cur_m) {
+    rnorm(cur_m, mu_pop, sd_pop * delta)
+  }
+)
+```
+
+
+# Power Simulation (Reduction in Minimum Individual)
+
+```{r}
+sim_power_min_indiv <- power_simulation(
+  delta_min_indiv,
+  function(i_equiv, delta, cur_m) {
+    c(
+      rnorm(cur_m - 1, mu_pop, sd_pop),
+      rnorm(1, mu_pop - delta * sd_pop, sd_pop)
+    )
+  }
+)
+```
+
+```{r}
+save(
+  mu_pop,
+  sd_pop,
+  n_qual_1,
+  n_equiv_1,
+  n_qual_2,
+  n_equiv_2,
+  sim_alpha,
+  delta_mean,
+  delta_sd,
+  delta_min_indiv,
+  sim_equiv,
+  sim_power_mean,
+  sim_power_sd,
+  sim_power_min_indiv,
+  file = "sim_results.RData"
+)
+```
+
+
+
+```{r}
+sessionInfo()
+```
+
