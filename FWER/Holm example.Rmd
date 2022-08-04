@@ -1,0 +1,433 @@
+---
+title: "Sample Code for Holm's Procedure"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This R Markdown document contains sample code for performing simulation studies 
+related to Holm's method for strong control of the Type I error rate.
+
+
+```{r}
+library(tidyverse)
+library(furrr)
+library(cmstatr)
+library(pwr)
+
+plan(multisession, workers = 12)
+```
+
+
+In these simulation studies we consider the case of two groups, with the same
+number of units of analysis in each group, and with the outcome vectors for the
+units of analysis within a particular group being independently generated from a
+single Multivariate Normal distribution. The mean vectors for the Multivariate
+Normal distributions of the two groups differ. The two Multivariate Normal 
+distributions will have the same covariance matrix in this setting. 
+The outcomes for a single unit of analysis may have be correlated depending on 
+the covariance matrix that is entered in the simulation study.
+
+To summarize, if we let $\mathbf{y}_{i,j}$ denote the vector of $k$ outcomes for
+unit $i = 1, \ldots, n$ in group $j = 1, 2$, then we assume that
+$$\mathbf{y}_{i,j} \sim \mathrm{N}_k(\mathbf{\mu}_j, \mathbf{\Sigma})$$
+independently.
+
+```{r}
+
+# Essential functions
+
+generate_data = function(number_observations, mu_vector, covariance_matrix)
+{
+  chol_covariance_matrix = chol(covariance_matrix)
+  
+  random_normal = matrix(rnorm((number_observations*length(mu_vector))), 
+                         ncol=number_observations, nrow=length(mu_vector))
+  
+  outcomes = t(chol_covariance_matrix)%*%random_normal + 
+             matrix(rep(mu_vector, number_observations), 
+                    ncol=number_observations, nrow=length(mu_vector))
+  
+  return(t(outcomes))
+}
+
+calculate_FWE_FDR_TDR = function(number_data_sets = 1e3,
+                                 nominal_significance_level = 0.05,
+                                 number_endpoints = 10,
+                                 number_group_1 = 100, number_group_2 = 100, 
+                                 mu_1 = rep(0, number_endpoints),
+                                 mu_2 = rep(0, number_endpoints),
+                                 sigma_vector = rep(1, number_endpoints), 
+                                 rho = 0.5)
+{
+  # The number of outcomes is denoted by number_endpoints
+  
+  # The total number of observations across the two groups is denoted by 
+  # total_number_observations
+  
+  # The number of observations in group 1 is number_group_1
+  
+  # The mu vectors for the two groups are denoted by mu_1 and mu_2, respectively
+  
+  # For simplicity, here we consider the case of being given a vector of 
+  # standard deviations for the different outcomes (sigma_vector), 
+  # and that the different outcomes have a constant correlation parameter (rho)
+  
+  # The entries for which the null hypothesis of the endpoints is "false" are 
+  # denoted by active_endpoint_indicator
+  
+  active_endpoint_indicator = as.numeric(mu_1-mu_2!=0)
+  
+  false_rejections = rep(0, number_data_sets)
+  FWER = rep(0, number_data_sets)
+  FDR = rep(0, number_data_sets)
+  TDR = rep(0, number_data_sets)
+  
+  covariance_matrix = diag(sigma_vector^2)
+  for(i in 1:(number_endpoints-1))
+  {
+    for(j in (i+1):number_endpoints)
+    {
+      covariance_matrix[i,j] = rho*sigma_vector[i]*sigma_vector[j]
+    }
+  }
+  
+  covariance_matrix = t(covariance_matrix) + covariance_matrix - 
+                      diag(sigma_vector^2)
+  
+  repeat_iterations = function(i)
+  {
+    new_group_1 = generate_data(number_group_1, mu_1, covariance_matrix)
+    new_group_2 = generate_data(number_group_2, mu_2, covariance_matrix)
+    
+    test_statistics = as.vector(
+      sapply((1:number_endpoints), 
+              function(x){t.test(new_group_1[,x],new_group_2[,x],
+                                 var.equal=TRUE)$statistic}))
+    
+    p_values = as.vector(
+      sapply((1:number_endpoints), 
+              function(x){t.test(new_group_1[,x],new_group_2[,x],
+                                 var.equal=TRUE)$p.value}))
+    
+    endpoint_indicator = (1:number_endpoints)[order(p_values)]    
+    active_endpoint_indicator = active_endpoint_indicator[order(p_values)]
+    ordered_p_values = p_values[order(p_values)]
+    holm_significance_levels = nominal_significance_level/
+                               (number_endpoints+1-1:number_endpoints)
+    rejection_indicators = as.numeric(ordered_p_values<=
+                                      holm_significance_levels)
+    
+    if(sum(rejection_indicators)==0)
+    {
+      false_rejections[i]<<-0
+      FWER[i]<<-0
+      FDR[i]<<-0
+      TDR[i]<<-0
+    }
+    
+    if(sum(rejection_indicators)>0)
+    {
+      if(length((1:length(rejection_indicators))[rejection_indicators==0])==0)
+      {
+        false_rejections[i]<<-number_endpoints-
+                              sum(active_endpoint_indicator==1)
+        FWER[i]<<-as.numeric(false_rejections[i]>0)
+        FDR[i]<<-false_rejections[i]/sum(rejection_indicators)
+        TDR[i]<<-sum(active_endpoint_indicator==1)/sum(rejection_indicators)
+      }
+      
+      if(length((1:length(rejection_indicators))[rejection_indicators==0])>0)
+      {
+        first_failure_to_reject_indicator =
+          min((1:length(rejection_indicators))[rejection_indicators==0])
+        
+        false_rejections[i]<<-sum(active_endpoint_indicator[1:(first_failure_to_reject_indicator-1)]==0)
+        FWER[i]<<-as.numeric(false_rejections[i]>0)
+        FDR[i]<<-false_rejections[i]/sum(rejection_indicators)
+        TDR[i]<<-sum(active_endpoint_indicator[1:(first_failure_to_reject_indicator-1)]==1)/
+                 sum(rejection_indicators)
+      }
+    }
+  }
+  
+  #pb = txtProgressBar(min=1, max=number_data_sets, style=3, width=50, char="=")
+    
+  repeat_the_iterations = sapply(1:number_data_sets, 
+                                 function(x)
+                                 {
+                                   repeat_iterations(x)
+                                   #setTxtProgressBar(pb, x)
+                                 })
+  
+  Type_I_FWE = sum(FWER)/number_data_sets
+  mean_FDR = mean(FDR)
+  mean_TDR = mean(TDR)
+  
+  return(c(Type_I_FWE, mean_FDR, mean_TDR))
+}
+```
+
+
+Let's consider a collection of sample cases in which 2 out of 10 endpoints are active, and in which each group has $100$ units of analysis.
+
+```{r}
+
+number_data_sets = 1e3
+number_endpoints = 10
+number_group_1 = 100
+number_group_2 = 100
+mu_1 = rep(0, number_endpoints)
+sigma_vector = rep(1, number_endpoints)
+```
+
+In the first set of cases, we have an effect size of $0.2$ and correlation parameters of $\rho = 0.2, 0.5, 0.8$. 
+
+```{r}
+mu_2 = c(0.2,0.2,rep(0, (number_endpoints-2)))
+
+rho = 0.2
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.5
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.8
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+```
+
+
+In the second set of cases, we have an effect size of $0.5$ and correlation parameters of $\rho = 0.2, 0.5, 0.8$. 
+
+```{r}
+mu_2 = c(0.5,0.5,rep(0, (number_endpoints-2)))
+
+rho = 0.2
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.5
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.8
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+```
+
+
+In the third set of cases in this setting, we have an effect size of $1$ and correlation parameters of $\rho = 0.2, 0.5, 0.8$. 
+
+```{r}
+mu_2 = c(1,1,rep(0, (number_endpoints-2)))
+
+rho = 0.2
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.5
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.8
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+```
+
+
+We now consider a collection of sample cases in which 5 out of 10 endpoints are active, and in which each group has $100$ units of analysis.
+
+```{r}
+
+number_data_sets = 1e3
+number_endpoints = 10
+number_group_1 = 100
+number_group_2 = 100
+mu_1 = rep(0, number_endpoints)
+sigma_vector = rep(1, number_endpoints)
+```
+
+In the first set of cases, we have an effect size of $0.2$ and correlation parameters of $\rho = 0.2, 0.5, 0.8$. 
+
+```{r}
+mu_2 = c(rep(0.2,5),rep(0,(number_endpoints-5)))
+
+rho = 0.2
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.5
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.8
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+```
+
+
+In the second set of cases, we have an effect size of $0.5$ and correlation parameters of $\rho = 0.2, 0.5, 0.8$. 
+
+```{r}
+mu_2 = c(rep(0.5,5),rep(0,(number_endpoints-5)))
+
+rho = 0.2
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.5
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.8
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+```
+
+
+In the third set of cases in this setting, we have an effect size of $1$ and correlation parameters of $\rho = 0.2, 0.5, 0.8$. 
+
+```{r}
+mu_2 = c(rep(1,5),rep(0,(number_endpoints-5)))
+
+rho = 0.2
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.5
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.8
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+```
+
+
+We finally consider a collection of sample cases in which 8 out of 10 endpoints are active, and in which each group has $100$ units of analysis.
+
+```{r}
+
+number_data_sets = 1e3
+number_endpoints = 10
+number_group_1 = 100
+number_group_2 = 100
+mu_1 = rep(0, number_endpoints)
+sigma_vector = rep(1, number_endpoints)
+```
+
+In the first set of cases, we have an effect size of $0.2$ and correlation parameters of $\rho = 0.2, 0.5, 0.8$. 
+
+```{r}
+mu_2 = c(rep(0.2,8),rep(0,(number_endpoints-8)))
+
+rho = 0.2
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.5
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.8
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+```
+
+
+In the second set of cases, we have an effect size of $0.5$ and correlation parameters of $\rho = 0.2, 0.5, 0.8$. 
+
+```{r}
+mu_2 = c(rep(0.5,8),rep(0,(number_endpoints-8)))
+
+rho = 0.2
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.5
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.8
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+```
+
+
+In the third set of cases in this setting, we have an effect size of $1$ and correlation parameters of $\rho = 0.2, 0.5, 0.8$. 
+
+```{r}
+mu_2 = c(rep(1,8),rep(0,(number_endpoints-8)))
+
+rho = 0.2
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.5
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+
+rho = 0.8
+
+calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
+                       number_endpoints, number_group_1, number_group_2, 
+                       mu_1, mu_2, sigma_vector, rho)
+```
