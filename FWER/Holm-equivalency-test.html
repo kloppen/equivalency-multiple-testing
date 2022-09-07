@@ -555,7 +555,7 @@ calculate_FWE_FDR_TDR = function(number_data_sets = 1e3,
   
   res %&gt;% 
     summarise(
-      Type_I_FWD = sum(FWER) / number_data_sets,
+      Type_I_FWE = sum(FWER) / number_data_sets,
       mean_FDR = mean(FDR),
       mean_TDR = mean(TDR)
     )
@@ -596,7 +596,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -605,7 +605,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.009    0.009        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -614,7 +614,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 </div>
@@ -628,7 +628,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -637,7 +637,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.009    0.009        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -646,7 +646,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 </div>
@@ -660,7 +660,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -669,7 +669,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.009    0.009        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -678,7 +678,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 </div>
@@ -698,7 +698,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003    0.001</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -707,7 +707,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003   0.0025   0.0025</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -716,7 +716,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001    0.002</code></pre>
 </div>
@@ -730,7 +730,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -739,7 +739,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -748,7 +748,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -762,7 +762,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -771,7 +771,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -780,7 +780,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -800,7 +800,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001    0.002</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -809,7 +809,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001    0.003</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -818,7 +818,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0    0.003</code></pre>
 </div>
@@ -832,7 +832,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -841,7 +841,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -850,7 +850,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 </div>
@@ -864,7 +864,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -873,7 +873,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -882,7 +882,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 </div>
@@ -905,7 +905,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -914,7 +914,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -923,7 +923,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 </div>
@@ -937,7 +937,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -946,7 +946,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -955,7 +955,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 </div>
@@ -969,7 +969,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -978,7 +978,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -987,7 +987,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 </div>
@@ -1007,7 +1007,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1016,7 +1016,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1025,7 +1025,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001    0.001</code></pre>
 </div>
@@ -1039,7 +1039,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1048,7 +1048,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1057,7 +1057,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1071,7 +1071,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1080,7 +1080,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1089,7 +1089,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1109,7 +1109,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1118,7 +1118,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1127,7 +1127,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0    0.002</code></pre>
 </div>
@@ -1141,7 +1141,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1150,7 +1150,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1159,7 +1159,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 </div>
@@ -1173,7 +1173,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1182,7 +1182,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1191,7 +1191,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 </div>
@@ -1217,7 +1217,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.008    0.008    0.002</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1226,7 +1226,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007    0.001</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1235,7 +1235,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002    0.002</code></pre>
 </div>
@@ -1249,7 +1249,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.008    0.008        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1258,7 +1258,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1267,7 +1267,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -1281,7 +1281,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.008    0.008        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1290,7 +1290,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1299,7 +1299,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -1319,7 +1319,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007    0.002</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1328,7 +1328,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007    0.001</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1337,7 +1337,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002    0.002</code></pre>
 </div>
@@ -1351,7 +1351,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1360,7 +1360,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1369,7 +1369,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -1383,7 +1383,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1392,7 +1392,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1401,7 +1401,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -1421,7 +1421,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006    0.002</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1430,7 +1430,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004    0.002</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1439,7 +1439,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002    0.002</code></pre>
 </div>
@@ -1453,7 +1453,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1462,7 +1462,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1471,7 +1471,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -1485,7 +1485,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1494,7 +1494,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1503,7 +1503,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -1526,7 +1526,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.012    0.012    0.001</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1535,7 +1535,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007    0.001</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1544,7 +1544,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001    0.002</code></pre>
 </div>
@@ -1558,7 +1558,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.012    0.012        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1567,7 +1567,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1576,7 +1576,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1590,7 +1590,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.012    0.012        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1599,7 +1599,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1608,7 +1608,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1628,7 +1628,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1       0.01     0.01    0.001</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1637,7 +1637,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007    0.001</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1646,7 +1646,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001    0.002</code></pre>
 </div>
@@ -1660,7 +1660,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1       0.01     0.01        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1669,7 +1669,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1678,7 +1678,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1692,7 +1692,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1       0.01     0.01        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1701,7 +1701,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1710,7 +1710,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1730,7 +1730,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007    0.001</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1739,7 +1739,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006    0.002</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1748,7 +1748,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001    0.002</code></pre>
 </div>
@@ -1762,7 +1762,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1771,7 +1771,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1780,7 +1780,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1794,7 +1794,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1803,7 +1803,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1812,7 +1812,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1838,7 +1838,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1847,7 +1847,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1856,7 +1856,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1870,7 +1870,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1879,7 +1879,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1888,7 +1888,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1902,7 +1902,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1911,7 +1911,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1920,7 +1920,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.001    0.001        0</code></pre>
 </div>
@@ -1940,7 +1940,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1949,7 +1949,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006    0.001</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1958,7 +1958,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0    0.001</code></pre>
 </div>
@@ -1972,7 +1972,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -1981,7 +1981,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -1990,7 +1990,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 </div>
@@ -2004,7 +2004,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2013,7 +2013,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2022,7 +2022,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 </div>
@@ -2042,7 +2042,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2051,7 +2051,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.005    0.005    0.001</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2060,7 +2060,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0    0.001</code></pre>
 </div>
@@ -2074,7 +2074,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2083,7 +2083,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.005    0.005        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2092,7 +2092,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 </div>
@@ -2106,7 +2106,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.006    0.006        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2115,7 +2115,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.005    0.005        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2124,7 +2124,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1          0        0        0</code></pre>
 </div>
@@ -2147,7 +2147,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.008    0.008        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2156,7 +2156,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.005    0.005        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2165,7 +2165,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 </div>
@@ -2179,7 +2179,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.008    0.008        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2188,7 +2188,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.005    0.005        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2197,7 +2197,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 </div>
@@ -2211,7 +2211,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.008    0.008        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2220,7 +2220,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.005    0.005        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2229,7 +2229,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.003    0.003        0</code></pre>
 </div>
@@ -2249,7 +2249,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.008    0.008        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2258,7 +2258,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2267,7 +2267,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -2281,7 +2281,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.008    0.008        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2290,7 +2290,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2299,7 +2299,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -2313,7 +2313,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.008    0.008        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2322,7 +2322,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2331,7 +2331,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -2351,7 +2351,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2360,7 +2360,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2369,7 +2369,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -2383,7 +2383,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2392,7 +2392,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2401,7 +2401,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>
@@ -2415,7 +2415,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.007    0.007        0</code></pre>
 <pre class="r"><code>rho = 0.5
@@ -2424,7 +2424,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.004    0.004        0</code></pre>
 <pre class="r"><code>rho = 0.8
@@ -2433,7 +2433,7 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        number_endpoints, number_group_1, number_group_2, 
                        mu_1, mu_2, sigma_vector, rho)</code></pre>
 <pre><code>## # A tibble: 1 × 3
-##   Type_I_FWD mean_FDR mean_TDR
+##   Type_I_FWE mean_FDR mean_TDR
 ##        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1      0.002    0.002        0</code></pre>
 </div>

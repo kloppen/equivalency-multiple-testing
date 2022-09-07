@@ -2,34 +2,41 @@
 title: "Sample Code for Incorporating Holm's Procedure in the Equivalency Test"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
-  
-  ```{r setup, include=FALSE}
+
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## 1. Introduction to the Simulation Study
 
-This R Markdown document contains sample code for performing simulation studies 
-related to Holm's method for strong control of the Type I error rate in the 
-equivalency test.
+This R Markdown document contains sample code for performing simulation
+studies related to Holm's method for strong control of the Type I error
+rate in the equivalency test.
 
-In these simulation studies we consider the case of the qualification and 
-equivalency samples, with $18$ units of analysis in the qualification sample and
-either $6$ or $8$ units of analysis in the equivalency sample. The outcome 
-vectors for the units of analysis within a particular group are independently 
-generated from a single Multivariate Normal distribution. The mean vectors for 
-the  Multivariate Normal distributions of the two groups differ. The two 
-Multivariate  Normal distributions will have the same covariance matrix in this 
-setting. The outcomes for a single unit of analysis may have be correlated 
-depending on the covariance matrix that is entered in the simulation study.
+In these simulation studies we consider the case of the qualification
+and equivalency samples, with $18$ units of analysis in the
+qualification sample and either $6$ or $8$ units of analysis in the
+equivalency sample. The outcome vectors for the units of analysis within
+a particular group are independently generated from a single
+Multivariate Normal distribution. The mean vectors for the Multivariate
+Normal distributions of the two groups differ. The two Multivariate
+Normal distributions will have the same covariance matrix in this
+setting. The outcomes for a single unit of analysis may have be
+correlated depending on the covariance matrix that is entered in the
+simulation study.
 
-To summarize, if we let $\mathbf{y}_{i,j}$ denote the vector of $k$ outcomes for
-unit $i = 1, \ldots, n$ in group $j = 1, 2$, then we assume that
+To summarize, if we let $\mathbf{y}_{i,j}$ denote the vector of $k$
+outcomes for unit $i = 1, \ldots, n$ in group $j = 1, 2$, then we assume
+that
 $$\mathbf{y}_{i,j} \sim \mathrm{N}_k(\mathbf{\mu}_j, \mathbf{\Sigma})$$
 independently.
 
-For PMC materials we consider $10$ endpoints, and for AM materials we consider $20$ or $30$ endpoints.
+For PMC materials we consider $10$ endpoints, and for AM materials we
+consider $20$ or $30$ endpoints.
 
 ```{r}
 #devtools::install_github("cmstatr/cmstatrExt")
@@ -216,7 +223,7 @@ calculate_FWE_FDR_TDR = function(number_data_sets = 1e3,
   
   res %>% 
     summarise(
-      Type_I_FWD = sum(FWER) / number_data_sets,
+      Type_I_FWE = sum(FWER) / number_data_sets,
       mean_FDR = mean(FDR),
       mean_TDR = mean(TDR)
     )
@@ -237,7 +244,6 @@ calculate_FWE_FDR_TDR = function(number_data_sets = 1e3,
 #                        mu_1, mu_2, sigma_vector, rho)
 # toc()
 ```
-
 
 ## 2. The Case of PMC Materials
 
@@ -810,7 +816,6 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        mu_1, mu_2, sigma_vector, rho)
 ```
 
-
 ## 3. The Case of AM Materials With 20 Total Endpoints
 
 ### 3.a. Equivalency Sample Size = 6
@@ -826,7 +831,6 @@ number_group_2 = 6
 mu_1 = rep(0, number_endpoints)
 sigma_vector = rep(1, number_endpoints)
 ```
-
 
 ```{r}
 mu_2 = c(0.2,0.2,rep(0, (number_endpoints-2)))
@@ -1382,7 +1386,6 @@ calculate_FWE_FDR_TDR (number_data_sets, nominal_significance_level = 0.05,
                        mu_1, mu_2, sigma_vector, rho)
 ```
 
-
 ## 4. The Case of AM Materials With 30 Total Endpoints
 
 ### 4.a. Equivalency Sample Size = 6
@@ -1398,7 +1401,6 @@ number_group_2 = 6
 mu_1 = rep(0, number_endpoints)
 sigma_vector = rep(1, number_endpoints)
 ```
-
 
 ```{r}
 mu_2 = c(0.2,0.2,rep(0, (number_endpoints-2)))
